@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import Chatkit from '@pusher/chatkit';
-import MessageList from './MessageList';
-import SendMessageForm from './SendMessageForm';
-// import TypingIndicator from './TypingIndicator';
-import WhosOnlineList from './WhosOnlineList';
-import Paper from '@material-ui/core/Paper';
+import ChatMessageSection from './ChatMessageSection';
+import ListUsersSection from './ListUsersSection';
+import MessageFormSection from './MessageFormSection';
 import Grid from '@material-ui/core/Grid';
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-class ChatScreen extends Component {
+const styles = {
+    chatMsgSection : {
+        height: '515px',
+        overflowY: 'auto',
+        padding: '12px'
+    }
+}
+
+class ChattingSection extends Component {
     constructor (props) {
         super();
 
@@ -25,14 +30,7 @@ class ChatScreen extends Component {
         }
 
         this.sendMessage = this.sendMessage.bind(this);
-        // this.sendTypingEvent = this.sendTypingEvent.bind(this);
     }
-
-    // sendTypingEvent() {
-    //     this.state.currentUser
-    //         .isTypingIn({ roomId: this.state.currentRoom.id })
-    //         .catch(error => console.error('error', error))
-    // }
 
     sendMessage(text) {
         this.state.currentUser.sendMessage({
@@ -44,14 +42,13 @@ class ChatScreen extends Component {
     componentDidMount () {
         const chatManager = new Chatkit.ChatManager({
             instanceLocator: 'v1:us1:3e937575-3d1a-4604-bc09-190f79f02b60',
-            userId: this.props.currentUsername,
+            userId: this.props.username,
             tokenProvider: new Chatkit.TokenProvider({
                 url: 'http://localhost:3001/authenticate'
             })
         })
 
-        chatManager
-        .connect()
+        chatManager.connect()
         .then(currentUser => {
           this.setState({ currentUser })
           return currentUser.subscribeToRoom({
@@ -76,23 +73,6 @@ class ChatScreen extends Component {
     }
 
     render() {
-        const styles = {
-            container: {
-                
-            },
-            chatContainer: {
-                padding: 20,
-                marginTop: 30
-            },
-            whosOnlineListContainer: {
-                padding: 20,
-                marginTop: 30,
-                marginLeft: 10
-            },
-            chatListContainer: {
-                
-            }
-        }
         return (
             <React.Fragment>
                 <AppBar position="static">
@@ -106,24 +86,19 @@ class ChatScreen extends Component {
                     </Toolbar>
                 </AppBar>
                 <Grid container spacing={24}>
-                    <Grid item xs={12} sm={3}>
-                        <Paper style={styles.whosOnlineListContainer}>
-                            <WhosOnlineList
-                                currentUser={this.state.currentUser}
-                                users={this.state.currentRoom.users}
-                            />
-                        </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={8} style={styles.chatListContainer}>
-                        <Paper style={styles.chatContainer}> 
-                            <MessageList
+                    <ListUsersSection
+                            currentUser={this.state.currentUser}
+                            users={this.state.currentRoom.users}
+                    />
+                    <Grid item xs={12} sm={8}>
+                        <section style={styles.chatMsgSection}>
+                            <ChatMessageSection
                                 messages={this.state.messages}
-                                style={styles.chatList}
                             />
-                            <SendMessageForm 
-                                onSubmit={this.sendMessage}
-                            />
-                        </Paper>
+                        </section>
+                        <MessageFormSection 
+                            onSubmit={this.sendMessage}
+                        />
                     </Grid>
                 </Grid>
             </React.Fragment>
@@ -131,4 +106,4 @@ class ChatScreen extends Component {
     }
 }
 
-export default ChatScreen;
+export default ChattingSection;
