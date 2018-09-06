@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import sagas from './sagas';
 
 import App from './App';
-// import CapsuleApp from './CapsuleApp';
 import ChatAppStore from './ChatAppStore';
 
 const sagaMiddleware = createSagaMiddleware();
