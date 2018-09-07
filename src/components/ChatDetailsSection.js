@@ -44,7 +44,7 @@ class ChattingSection extends Component {
             instanceLocator: 'v1:us1:3e937575-3d1a-4604-bc09-190f79f02b60',
             userId: this.props.username,
             tokenProvider: new Chatkit.TokenProvider({
-                url: 'http://localhost:3001/authenticate'
+                url: 'https://final-capsule-project-app.herokuapp.com/authenticate'
             })
         })
 
