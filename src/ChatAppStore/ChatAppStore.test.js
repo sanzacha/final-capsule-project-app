@@ -18,6 +18,6 @@ describe('Capstone Project unit testing', function() {
         store.dispatch(action);
     
         store.getState().should.have.property('username');
-        store.getState().username.equal('santhosh');
+        store.getState().should.have.property('username').and.equal('santhosh');
   });
 });

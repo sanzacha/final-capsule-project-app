@@ -16,6 +16,7 @@ jobs:
     steps:
       - checkout
       - run: yarn install
+      - runn: yarn mochatest
       - run: yarn build
 
   deploy:
