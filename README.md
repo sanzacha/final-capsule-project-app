@@ -5,13 +5,14 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Table of Contents
 
-- [Installation Steps](#Installation Steps)
-  - Clone the repository (#https://github.com/sanzacha/engineering-setup-trello-app)
-  - Enter into `engineering-setup-trello-app` folder
-  - Run Command - yarn install
-  - Run Command - yarn start
+- Checkout Project
+  - Clone the repository (https://github.com/sanzacha/engineering-setup-trello-app)
 
-- [URL](#IURL)
+- Installation Steps - Run Below commands from Terminal
+  - cd engineering-setup-trello-app
+  - yarn install
+  - yarn serve
+
+- Open the URL in Browser
   - http://localhost:3000/
 
-  
