@@ -9,6 +9,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChatMessageSection from "./ChatMessageSection";
 import ListUsersSection from "./ListUsersSection";
 import MessageFormSection from "./MessageFormSection";
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const styles = {
   chatMsgSection: {
@@ -19,6 +21,13 @@ const styles = {
 };
 
 class ChattingSection extends Component {
+
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    currentuser: PropTypes.object,
+    messages: PropTypes.array
+  };
+
   constructor(props) {
     super();
 
@@ -26,6 +35,7 @@ class ChattingSection extends Component {
       currentUser: {},
       currentRoom: {},
       messages: [],
+      mesgUpdate: true,
       usersWhoAreTyping: []
     };
 
@@ -33,49 +43,50 @@ class ChattingSection extends Component {
   }
 
   sendMessage(text) {
-    this.state.currentUser.sendMessage({
+    this.props.currentuser.sendMessage({
       text,
-      roomId: this.state.currentRoom.id
+      roomId: 14943454
     });
+
+    this.props.dispatch({
+      type: 'GET_MESSAGES',
+      roomId:  14943454,
+      currentUser: this.props.currentuser
+      });
+
+    this.setState({
+      mesgUpdate : true
+    })
+
   }
 
   componentDidMount() {
-    const chatManager = new Chatkit.ChatManager({
-      instanceLocator: "v1:us1:3e937575-3d1a-4604-bc09-190f79f02b60",
-      userId: this.props.username,
-      tokenProvider: new Chatkit.TokenProvider({
-        url: '/authenticate'
-      })
+
+    //console.log('UserName:', this.props.username);
+
+    this.props.dispatch({
+      type: 'GET_CURRENT_USER_NAME',
+      currentUserName: this.props.username,
     });
-
-    // url: "http://localhost:3001/authenticate"
-
-    chatManager
-      .connect()
-      .then(currentUser => {
-        this.setState({ currentUser });
-        return currentUser.subscribeToRoom({
-          roomId: 14943454,
-          messageLimit: 100,
-          hooks: {
-            onNewMessage: message => {
-              this.setState({
-                messages: [...this.state.messages, message]
-              });
-            },
-            onUserCameOnline: () => this.forceUpdate(),
-            onUserWentOffline: () => this.forceUpdate(),
-            onUserJoined: () => this.forceUpdate()
-          }
-        });
-      })
-      .then(currentRoom => {
-        this.setState({ currentRoom });
-      })
-      .catch(error => console.error("error", error));
   }
 
   render() {
+    const currentuser_ = this.props.currentuser || {};
+    const users = currentuser_ ? currentuser_.users : [];
+    const messages = this.props.messages || [];
+
+    if(users && users.length && this.state.mesgUpdate ) {
+        this.props.dispatch({
+            type: 'GET_MESSAGES',
+            roomId:  14943454,
+            currentUser: this.props.currentuser
+        });
+
+      this.setState({
+        mesgUpdate : false
+      })
+    }
+
     return (
       <React.Fragment>
         <AppBar position="static">
@@ -90,12 +101,12 @@ class ChattingSection extends Component {
         </AppBar>
         <Grid container spacing={24}>
           <ListUsersSection
-            currentUser={this.state.currentUser}
-            users={this.state.currentRoom.users}
+            currentUser={currentuser_}
+            users={users}
           />
           <Grid item xs={12} sm={8}>
             <section style={styles.chatMsgSection}>
-              <ChatMessageSection messages={this.state.messages} />
+              <ChatMessageSection messages={messages} />
             </section>
             <MessageFormSection onSubmit={this.sendMessage} />
           </Grid>
@@ -105,4 +116,9 @@ class ChattingSection extends Component {
   }
 }
 
-export default ChattingSection;
+const mapStateToProps = (state) => ({
+  currentuser: state.currentUserName,
+  messages: state.messages
+})
+
+export default connect(mapStateToProps) (ChattingSection);
