@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Chatkit from "@pusher/chatkit";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
