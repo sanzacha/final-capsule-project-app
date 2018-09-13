@@ -10,10 +10,11 @@ const chatkit = new Chatkit.default({
   key: 'a4108db0-88ca-42ac-8c6b-f4d234d55bef:FHmNyXy8spkYFhwj/tvn4stO1bSOYSLU/HY79N6Cixo=',
 })
 
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
+
+app.use(express.static(__dirname + '/build'));
 
 app.post('/users', (req, res) => {
   const { username } = req.body
@@ -38,6 +39,7 @@ app.post('/authenticate', (req, res) => {
 })
 
 const PORT = process.env.PORT || 3001
+
 app.listen(PORT, err => {
   if (err) {
     console.error(err)
@@ -45,3 +47,5 @@ app.listen(PORT, err => {
     console.log(`Running on port ${PORT}`)
   }
 })
+
+// const PORT = process.env.PORT || 3001
