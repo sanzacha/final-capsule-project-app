@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LoginUserSection from './components/LoginUserSection';
 import ChatDetailsSection from './components/ChatDetailsSection';
-import {connect} from 'react-redux';
 
 class App extends Component {
   static propTypes = {
@@ -11,35 +11,33 @@ class App extends Component {
   };
 
   constructor(props) {
-    super(props)
-    this.state = {
-      username: ''
-    }
-    this.getUser = this.getUser.bind(this)
+    super(props);
+    this.getUser = this.getUser.bind(this);
   }
 
   getUser(username) {
     this.props.dispatch({
       type: 'GET_USER_NAME',
-      username
+      username,
     });
   }
 
   render() {
-    const screen_ = this.props.screen || '';
-    const username_ = this.props.username || '';
-    if (screen_ === '') {
-      return <LoginUserSection onSubmit={this.getUser} />
+    const screen = this.props.screen || '';
+    const username = this.props.username || '';
+
+    if (screen === '') {
+      return <LoginUserSection onSubmit={this.getUser} />;
     }
-    if (screen_ === 'ChattingSection') {
-      return <ChatDetailsSection username={username_} />
+    if (screen === 'ChattingSection') {
+      return <ChatDetailsSection username={username} />;
     }
   }
 }
 
 const mapStateToProps = (state) => ({
   screen: state.screen,
-  username : state.username
+  username: state.username,
 });
 
 export default connect(mapStateToProps) (App)
