@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
+import React, { Component } from 'react';
+import Paper from '@material-ui/core/Paper';
 
 const styles = {
   paperStyle: {
-    padding: "10px"
+    padding: '10px'
   },
   listStyle: {
-    listStyle: "none",
-    padding: "10px 0 0"
+    listStyle: 'none',
+    padding: '10px 0 0'
   }
 };
 

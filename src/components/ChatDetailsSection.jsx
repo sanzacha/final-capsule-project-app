@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import Grid from "@material-ui/core/Grid";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChatMessageSection from "./ChatMessageSection";
-import ListUsersSection from "./ListUsersSection";
-import MessageFormSection from "./MessageFormSection";
+import React, { Component } from 'react';
+import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChatMessageSection from './ChatMessageSection';
+import ListUsersSection from './ListUsersSection';
+import MessageFormSection from './MessageFormSection';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const styles = {
   chatMsgSection: {
-    height: "515px",
-    overflowY: "auto",
-    padding: "12px"
+    height: '515px',
+    overflowY: 'auto',
+    padding: '12px'
   }
 };
 
@@ -88,12 +88,12 @@ class ChattingSection extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="static">
+        <AppBar position='static'>
           <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
+            <IconButton color='inherit' aria-label='Menu'>
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit">
+            <Typography variant='title' color='inherit'>
               Chat App
             </Typography>
           </Toolbar>

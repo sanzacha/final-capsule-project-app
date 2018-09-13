@@ -5,12 +5,11 @@ export function getUserName(username) {
   return axios
     .post('/users', { username })
     .then(
-      result =>
-        new Promise((resolve) => {
-          resolve(username);
-      })
+      new Promise((resolve) => {
+        resolve(username);
+      }),
     )
-    .catch(error => {
+    .catch(() => {
       return username;
     });
 }
@@ -42,11 +41,7 @@ export function getMessagesService(arg) {
       direction: 'older',
       limit: 100,
     })
-    .then(messages =>
-      new Promise((resolve) => {
-        resolve(messages);
-      }).catch(err => {
-        console.log(`Error fetching messages: ${err}`);
-      })
-    );
+    .then(messages => new Promise((resolve) => {
+      resolve(messages);
+    }));
 }

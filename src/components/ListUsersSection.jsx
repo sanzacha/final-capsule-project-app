@@ -10,10 +10,17 @@ class UsersList extends Component {
     color: '#f44336',
   };
 
+  userListContiner = {
+    height: '600px',
+    overflowY: 'auto',
+    marginTop: '20px',
+    width: '250px'
+  }
+
   render() {
     if (this.props.users) {
       return (
-        <div>
+        <div style={this.userListContiner}>
           <List>
             {this.props.users.map((user, index) => {
               if (user.id === this.props.currentUser.id) {
