@@ -16,3 +16,5 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - Open the URL in Browser
   - http://localhost:3000/
 
+- CI/CD 
+  - https://final-capsule-project-app.herokuapp.com/
