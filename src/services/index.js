@@ -5,11 +5,12 @@ export function getUserName(username) {
   return axios
     .post('/users', { username })
     .then(
-      new Promise((resolve) => {
-        resolve(username);
-      }),
+      result =>
+        new Promise((resolve, reject) => {
+          resolve(username);
+        })
     )
-    .catch(() => {
+    .catch(error => {
       return username;
     });
 }
@@ -26,25 +27,29 @@ export function getCurrentUserNameService(username) {
   })
     .connect()
     .then(
-      currentUser => new Promise((resolve) => {
-          if (currentUser.users.length > 0){
-            resolve(currentUser)
+      currentUser =>
+        new Promise(resolve => {
+          if (currentUser.users.length > 0) {
+            resolve(currentUser);
           } else {
-              currentUser.joinRoom({ roomId: 14943454 })
+            currentUser
+              .joinRoom({ roomId: 14943454 })
               .then(room => {
-                  console.log(`Joined room with ID: ${room.id}`)
-                  currentUser.messages = [{
-                      text: room.name,
-                      senderId: ''
-                  }]
-                  resolve(currentUser)
+                currentUser.messages = [
+                  {
+                    text: room.name,
+                    senderId: ""
+                  }
+                ];
+                resolve(currentUser);
               })
               .catch(err => {
-                  console.log(`Printing error here ${err}`)
-              })
+                console.log(`Error joining room ${err}`);
+              });
           }
-      }),
-    );
+        })
+    )
+    .catch(error => console.error('error', error));
 }
 
 // url: 'http://localhost:3001/authenticate',   -- Local
@@ -56,7 +61,10 @@ export function getMessagesService(arg) {
       direction: 'older',
       limit: 100,
     })
-    .then(messages => new Promise((resolve) => {
-      resolve(messages);
-    }));
+    .then(
+      messages =>
+        new Promise(resolve => {
+          resolve(messages)
+        })
+    );
 }
