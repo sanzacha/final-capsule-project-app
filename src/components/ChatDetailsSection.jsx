@@ -15,8 +15,8 @@ const styles = {
   chatMsgSection: {
     height: '515px',
     overflowY: 'auto',
-    padding: '12px'
-  }
+    padding: '12px',
+  },
 };
 
 class ChattingSection extends Component {
@@ -24,7 +24,8 @@ class ChattingSection extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     currentuser: PropTypes.object,
-    messages: PropTypes.array
+    currentRoom:  PropTypes.object,
+    messages: PropTypes.array,
   };
 
   constructor(props) {
@@ -32,24 +33,31 @@ class ChattingSection extends Component {
 
     this.state = {
       currentUser: {},
-      currentRoom: {},
       messages: [],
       mesgUpdate: true,
-      usersWhoAreTyping: []
+      newRoom: true,
+      roomId: 14943454
     };
 
     this.sendMessage = this.sendMessage.bind(this);
   }
 
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_CURRENT_USER_NAME',
+      currentUserName: this.props.username,
+    });
+  }
+
   sendMessage(text) {
     this.props.currentuser.sendMessage({
       text,
-      roomId: 14943454
+      roomId: this.props.roomId ? this.props.roomId : 14943454
     });
 
     this.props.dispatch({
       type: 'GET_MESSAGES',
-      roomId:  14943454,
+      roomId:  this.props.roomId ? this.props.roomId : 14943454,
       currentUser: this.props.currentuser
       });
 
@@ -57,16 +65,6 @@ class ChattingSection extends Component {
       mesgUpdate : true
     })
 
-  }
-
-  componentDidMount() {
-
-    //console.log('UserName:', this.props.username);
-
-    this.props.dispatch({
-      type: 'GET_CURRENT_USER_NAME',
-      currentUserName: this.props.username,
-    });
   }
 
   render() {

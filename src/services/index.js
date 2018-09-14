@@ -27,7 +27,22 @@ export function getCurrentUserNameService(username) {
     .connect()
     .then(
       currentUser => new Promise((resolve) => {
-        resolve(currentUser);
+          if (currentUser.users.length > 0){
+            resolve(currentUser)
+          } else {
+              currentUser.joinRoom({ roomId: 14943454 })
+              .then(room => {
+                  console.log(`Joined room with ID: ${room.id}`)
+                  currentUser.messages = [{
+                      text: room.name,
+                      senderId: ''
+                  }]
+                  resolve(currentUser)
+              })
+              .catch(err => {
+                  console.log(`Printing error here ${err}`)
+              })
+          }
       }),
     );
 }
