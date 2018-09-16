@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class RoomList extends Component {
     render() {
-        return <h1></h1>
+        return <h1>Capstone Project</h1>
     }
 }
 

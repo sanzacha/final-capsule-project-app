@@ -1,5 +1,5 @@
 {
-  "name": "react-chat-capsule-project",
+  "name": "react-capstone-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,11 +8,12 @@
     "@pusher/chatkit": "^0.7.17",
     "axios": "^0.18.0",
     "cors": "^2.8.4",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "express": "^4.16.3",
     "json-server": "^0.14.0",
     "material-ui": "^0.20.1",
     "material-ui-icons": "^1.0.0-beta.36",
-    "prop-types": "^15.6.2",
     "pusher-chatkit-server": "^0.12.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -21,31 +22,27 @@
     "react-scripts": "1.1.1",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
-    "yarn": "^1.9.4",
-    "concurrently": "^3.5.1",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0"
+    "watchman": "^1.0.0",
+    "concurrently": "^3.5.1"
   },
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
     "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1",
-    "mocha": "^5.2.0",
-    "react-addons-test-utils": "^15.6.2",
-    "sinon": "^6.1.5"
+    "eslint-plugin-react": "^7.11.1"
   },
   "scripts": {
-    "serve": "concurrently \"node ./server.js\" \"react-scripts start\"",
     "start": "concurrently \"node ./server.js\" \"react-scripts start\"",
-    "test": "CI=true react-scripts test --env=jsdom",
-    "lint": "eslint src",
-    "mochatest": "mocha src/**/*.test.js",
     "build": "react-scripts build",
     "postinstall": "react-scripts build",
+    "test": "CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "v8.11.3",
+    "npm": "6.2.0"
   }
 }
