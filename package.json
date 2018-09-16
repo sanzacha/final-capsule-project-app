@@ -40,9 +40,5 @@
     "postinstall": "react-scripts build",
     "test": "CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "engines": {
-    "node": "v8.11.3",
-    "npm": "6.2.0"
   }
 }
