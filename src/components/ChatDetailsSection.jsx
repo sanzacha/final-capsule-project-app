@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChatMessageSection from './ChatMessageSection';
 import ListUsersSection from './ListUsersSection';
 import MessageFormSection from './MessageFormSection';
+import RoomList from './RoomList';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -97,15 +98,21 @@ class ChattingSection extends Component {
           </Toolbar>
         </AppBar>
         <Grid container spacing={24}>
-          <ListUsersSection
-            currentUser={currentuser_}
-            users={users}
-          />
+          <Grid item xs={12} sm={2}>
+              <ListUsersSection
+                currentUser={currentuser_}
+                users={users}
+              />
+          </Grid>
+
           <Grid item xs={12} sm={8}>
             <section style={styles.chatMsgSection}>
               <ChatMessageSection messages={messages} />
             </section>
             <MessageFormSection onSubmit={this.sendMessage} />
+          </Grid>
+          <Grid item xs={12} sm={2}>
+              <RoomList />
           </Grid>
         </Grid>
       </React.Fragment>

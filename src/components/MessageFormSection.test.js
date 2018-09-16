@@ -3,20 +3,20 @@ const ReactDom = require('react-dom');
 const Enzyme = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
 const { configure, shallow, render } = require('enzyme');
-import LoginUserSection from './LoginUserSection';
+import MessageFormSection from './MessageFormSection';
 
 Enzyme.configure({
     adapter: new Adapter(),
 });
 
-it('Login Component Renders', () => {
+it('Message Form Component Renders', () => {
     const div = document.createElement('div');
-    ReactDom.render('<LoginUserSection />', div);
+    ReactDom.render('<MessageFormSection />', div);
     ReactDom.unmountComponentAtNode(div);
 });
 
-describe("<LoginUserSection />", function() {
-    it('Should Render login <LoginUserSection /> component passing test', () => {
-        const userInputSection = shallow(<LoginUserSection />);
+describe("<MessageFormSection />", function() {
+    it('Should Render Message Input section <MessageFormSection /> component', () => {
+        const messageInputSection = shallow(<MessageFormSection />);
     });
 });

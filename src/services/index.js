@@ -18,13 +18,13 @@ export function getUserName(username) {
 // .post('http://localhost:3001/users', { username })  -- Local
 
 export function getCurrentUserNameService(username) {
-  return new Chatkit.ChatManager({
-    instanceLocator: 'v1:us1:3e937575-3d1a-4604-bc09-190f79f02b60',
-    userId: username,
-    tokenProvider: new Chatkit.TokenProvider({
-      url: '/authenticate',
-    }),
-  })
+    return new Chatkit.ChatManager({
+      instanceLocator: 'v1:us1:3e937575-3d1a-4604-bc09-190f79f02b60',
+      userId: username,
+      tokenProvider: new Chatkit.TokenProvider({
+        url: '/authenticate',
+      }),
+    })
     .connect()
     .then(
       currentUser =>
