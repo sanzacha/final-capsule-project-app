@@ -28,6 +28,18 @@ function ChatAppStore(currState, action) {
         rooms: currState.rooms,
       });
 
+    case 'SET_CREATE_ROOM':
+      return Object.assign({}, {
+        screen: currState.screen,
+        username: currState.username,
+        currentUser: currState.currentUser,
+        messages: [{
+          text: action.room.name,
+          senderId: ''
+        }],
+        roomId: action.room.id
+      })
+
     default:
       return currState;
   }

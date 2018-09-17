@@ -4,6 +4,7 @@ import {
   getUserName,
   getCurrentUserNameService,
   getMessagesService,
+  getCreateRoomService,
 } from './services';
 
 function* userName(action) {
@@ -25,8 +26,14 @@ function* getMessages(action) {
   yield put({ type: 'SET_MESSAGES', messages });
 }
 
+function* getCreateRoom(action) {
+  const room = yield call(getCreateRoomService, action);
+  yield put({ type: 'SET_CREATE_ROOM', room });
+}
+
 export default function* sagas() {
   yield takeLatest('GET_USER_NAME', userName);
   yield takeLatest('GET_CURRENT_USER_NAME', getCurrentUserName);
   yield takeLatest('GET_MESSAGES', getMessages);
+  yield takeLatest('GET_CREATE_ROOM', getCreateRoom);
 }

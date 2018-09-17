@@ -68,3 +68,17 @@ export function getMessagesService(arg) {
         })
     );
 }
+
+export function getCreateRoomService(action) {
+    return action.currentUser.currentuser.createRoom({
+        name: action.roomName,
+        private: false
+    })
+    .then(room => new Promise((resolve, reject) => {
+        resolve(room)
+        window.location.reload();
+    })
+    .catch(err => {
+        console.log(`Error: ${err}`)
+    }))
+}

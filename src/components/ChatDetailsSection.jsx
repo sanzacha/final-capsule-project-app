@@ -9,6 +9,7 @@ import ChatMessageSection from "./ChatMessageSection";
 import ListUsersSection from "./ListUsersSection";
 import MessageFormSection from "./MessageFormSection";
 import LogoutComponent from "./LogoutComponent";
+import CreateRoom from "./CreateRoom";
 import RoomList from "./RoomList";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -111,7 +112,9 @@ class ChattingSection extends Component {
           </Grid>
           <Grid item xs={12} sm={2}>
             <LogoutComponent />
-            <RoomList rooms={rooms} />
+            <CreateRoom currentUser={this.props} />
+            <RoomList
+              rooms={rooms} />
           </Grid>
         </Grid>
       </React.Fragment>
