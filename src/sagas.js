@@ -12,20 +12,16 @@ function* userName(action) {
 }
 
 function* getCurrentUserName(action) {
-
   const currentUserName = yield call(
     getCurrentUserNameService,
     action.currentUserName,
   );
-
-  console.log('action::', currentUserName);
 
   yield put({ type: 'SET_CURRENT_USER_NAME', currentUserName });
 }
 
 function* getMessages(action) {
   const messages = yield call(getMessagesService, action);
-  console.log("saga-" + messages);
   yield put({ type: 'SET_MESSAGES', messages });
 }
 

@@ -16,6 +16,7 @@ function ChatAppStore(currState, action) {
         screen: currState.screen,
         username: currState.username,
         currentUserName: action.currentUserName,
+        rooms: action.currentUserName.rooms,
       });
 
     case 'SET_MESSAGES':
@@ -24,6 +25,7 @@ function ChatAppStore(currState, action) {
         username: currState.username,
         currentUserName: currState.currentUserName,
         messages: action.messages,
+        rooms: currState.rooms,
       });
 
     default:
