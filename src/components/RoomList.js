@@ -24,7 +24,6 @@ const styles = {
 
 class RoomList extends Component {
     render() {
-        {this.props.rooms}
         return (
             <div>
                 <h1 style={styles.roomListStyle}>User Room List</h1>
