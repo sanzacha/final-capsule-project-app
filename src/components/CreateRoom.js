@@ -15,34 +15,41 @@ const styles = {
 
 class CreateRoom extends Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.tirggerCreateRoom = this.handleCreateRoom.bind(this);
+        this.state = {
+            roomname: '',
+            open: false,
+        }
 
-      // console.log('constructor', this.props);
+        this.tirggerCreateRoom = this.handleCreateRoom.bind(this);
     }
 
-    state = {
-      open: false,
-    };
 
     handleClickOpen = () => {
-      this.setState({ open: true });
+        this.setState({ open: true });
     };
 
     handleClose = () => {
-      this.setState({ open: false });
+        this.setState({ open: false });
     };
 
-    handleCreateRoom = () => {
-      const roomName = document.getElementById('roomname').value;
+    handleRoomTextChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
-      this.setState({ open: false });
-      this.props.currentUser.dispatch({
-            type: 'GET_CREATE_ROOM',
-            currentUser: this.props.currentUser,
-            roomName
-      });
+    handleCreateRoom = () => {
+        const roomName = this.state.roomname;
+
+        this.setState({ open: false });
+
+        this.props.currentUser.dispatch({
+              type: 'GET_CREATE_ROOM',
+              currentUser: this.props.currentUser,
+              roomName
+        });
     };
 
     render() {
@@ -65,6 +72,9 @@ class CreateRoom extends Component {
                       label="Room name"
                       type="text"
                       fullWidth
+                      name='roomname'
+                      value={this.state.roomname}
+                      onChange={ e => this.handleRoomTextChange(e) }
                     />
                   </DialogContent>
                   <DialogActions>

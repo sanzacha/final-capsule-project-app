@@ -71,8 +71,8 @@ class ChattingSection extends Component {
   }
 
   render() {
-    const currentuser_ = this.props.currentuser || {};
-    const users = currentuser_ ? currentuser_.users : [];
+    const currentuser = this.props.currentuser || {};
+    const users = currentuser ? currentuser.users : [];
     const messages = this.props.messages || [];
     const rooms = this.props.rooms || [];
 
@@ -102,7 +102,7 @@ class ChattingSection extends Component {
         </AppBar>
         <Grid container spacing={24}>
           <Grid item xs={12} sm={2}>
-            <ListUsersSection currentUser={currentuser_} users={users} />
+            <ListUsersSection currentUser={currentuser} users={users} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <section style={styles.chatMsgSection}>
