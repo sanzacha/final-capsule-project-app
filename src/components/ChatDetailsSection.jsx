@@ -8,6 +8,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChatMessageSection from "./ChatMessageSection";
 import ListUsersSection from "./ListUsersSection";
 import MessageFormSection from "./MessageFormSection";
+import LogoutComponent from "./LogoutComponent";
 import RoomList from "./RoomList";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -74,8 +75,6 @@ class ChattingSection extends Component {
     const messages = this.props.messages || [];
     const rooms = this.props.rooms || [];
 
-    console.log('ddsfsd::', this.props.rooms);
-
     if (users && users.length && this.state.mesgUpdate) {
       this.props.dispatch({
         type: "GET_MESSAGES",
@@ -104,7 +103,6 @@ class ChattingSection extends Component {
           <Grid item xs={12} sm={2}>
             <ListUsersSection currentUser={currentuser_} users={users} />
           </Grid>
-
           <Grid item xs={12} sm={8}>
             <section style={styles.chatMsgSection}>
               <ChatMessageSection messages={messages} />
@@ -112,6 +110,7 @@ class ChattingSection extends Component {
             <MessageFormSection onSubmit={this.sendMessage} />
           </Grid>
           <Grid item xs={12} sm={2}>
+            <LogoutComponent />
             <RoomList rooms={rooms} />
           </Grid>
         </Grid>

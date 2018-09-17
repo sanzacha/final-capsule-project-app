@@ -12,6 +12,12 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+    
+    this.state = ({
+        screen: localStorage.getItem('screen') || '',
+        username: localStorage.getItem('username') || '',
+    });
+
     this.getUser = this.getUser.bind(this);
   }
 
@@ -23,8 +29,13 @@ class App extends Component {
   }
 
   render() {
-    const screen = this.props.screen || '';
-    const username = this.props.username || '';
+    const username = this.props.username || this.state.username;
+    const screen = this.props.screen || this.state.screen;
+
+    if (screen && username) {
+        localStorage.setItem('screen', screen);
+        localStorage.setItem('username', username);
+    }
 
     if (screen === '') {
       return <LoginUserSection onSubmit={this.getUser} />;

@@ -28,7 +28,7 @@ class RoomList extends Component {
             <div>
                 <h1 style={styles.roomListStyle}>User Room List</h1>
                 {this.props.rooms.map((rooms, index) => (
-                  <List component="nav" style={styles.navStyle}>
+                  <List key={index} component="nav" style={styles.navStyle}>
                       <ListItem style={styles.ListItemStyle}>
                           <ListItemText primary={rooms.name} />
                       </ListItem>
